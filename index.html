@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <link href="./index.css" rel="stylesheet" />
+    <title>Form</title>
+  </head>
+  <body>
+    <form id="registration">
+      <h2>Registration</h2>
+
+      <input type="text" placeholder="Last name" name="lastName" required />
+      <input type="text" placeholder="First name" name="firstName" required />
+
+      <input type="email" placeholder="email" name="email" required />
+      <input type="tel" placeholder="phone" name="phone" required />
+      <input type="tel" placeholder="phone" name="phone" required />
+      <div class="password-block">
+        <input
+          type="password"
+          placeholder="password"
+          name="password"
+          required
+        />
+        <button class="hide-btn">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.35 14.7748C3.49166 13.5582 2.29166 11.7248 2.29166 10.1165C2.29166 7.38317 5.74166 4.03316 10 4.03316C11.7417 4.03316 13.3583 4.5915 14.6583 5.45816"
+              stroke="#727272"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M16.5414 7.17516C17.2839 8.11683 17.7164 9.1585 17.7164 10.1168C17.7164 12.8502 14.2581 16.2002 9.99975 16.2002C9.24142 16.2002 8.50058 16.0918 7.80808 15.9002"
+              stroke="#727272"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.13808 11.9725C7.64225 11.4817 7.36475 10.8125 7.36725 10.115C7.36392 8.66083 8.54058 7.47917 9.99558 7.47667C10.6956 7.475 11.3673 7.7525 11.8623 8.2475"
+              stroke="#727272"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12.5912 10.5826C12.3962 11.6592 11.5537 12.5034 10.4771 12.7009"
+              stroke="#727272"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M16.5764 3.54158L3.43141 16.6866"
+              stroke="#727272"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <input type="date" value="2025-07-21" disabled />
+      <label>
+        I read all terms and accept it
+        <input
+          type="checkbox"
+          name="acceptTerms"
+          value="true"
+          required
+          style="display: inline; width: auto"
+        />
+      </label>
+
+      <div class="btn-wrap">
+        <button type="reset">Reset</button>
+        <button type="submit">Send</button>
+      </div>
+    </form>
+
+    <!-- <input type="color"> - колір
+		<input type="date" value="2025-07-21"> - дата
+		<input type="week"> - тижні
+		<input type="month"> - місяць
+		<input type="number" min="0"> - цифра
+		<input type="range" min="0" max="100"  step="50">
+		<input type="text"> - текст
+		<input type="search" > - пошук(як текст)
+		<input type="tel" > - телефон
+		<input type="time" > -час
+		<input type="url"> - посилання
+		<input type="file" multiple accept="image/png"> - файл
+		<input type="hidden"> - приховане поле
+		<input type="image" alt="image" > - Поле як картинка
+		<input type="password" > - пароль
+
+		<input type="email" > - email
+		<input type="radio" name="car" value="bmw"> -1 радио кнопка
+		<input type="radio" name="car" value="audi"> -2 радио кнопка
+		<input type="checkbox" name="terms"> - checkbox single
+		<input type="checkbox" name="animal"  value="dog" > - checkbox
+		<input type="checkbox" name="animal"  value="cat" > - checkbox
+		<input type="checkbox" name="animal"  value="snake" > - checkbox
+
+		<div>
+			<select name="country" multiple>
+				<option value="usa">США</option>
+				<option value="canada">Канада</option>
+				<option value="uk">Велика Британія</option>
+			</select> - select 
+		
+		</div>
+	 -->
+
+    <!-- </form> -->
+
+    <div id="resultDiv"></div>
+
+    <script>
+      document.querySelector(".hide-btn").addEventListener("click", (event) => {
+        const pasword = document.querySelector("#registration input[name='password']");
+        if (pasword.getAttribute("type") === "text") {
+          pasword.setAttribute("type", "password");
+        } else {
+          pasword.setAttribute("type", "text");
+        }
+      });
+
+      document.addEventListener("submit", function (event) {
+        event.preventDefault();
+        console.log(event, "event");
+        // Check if the submitted form is your form with the ID 'myForm'
+        if (event.target.id === "registration") {
+          // Get the form element
+          const form = event.target;
+
+          // Get all form fields
+          const formData = new FormData(form);
+
+          let result = "";
+
+          // Iterate through form data and build the result string
+          formData.forEach(function (value, key) {
+            result += key + ": " + value + "\n";
+          });
+
+          // Display the result in the resultDiv
+          document.getElementById("resultDiv").innerText = result;
+          // If you want to do something else with the result, you can do it here
+          document.getElementById("registration").reset();
+          //reset form values
+          return false;
+        }
+      });
+    </script>
+  </body>
+</html>
